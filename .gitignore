@@ -1,3 +1,48 @@
+# =========================
+# Language Specific
+# =========================
+
+# Java
+# =========================
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+# =========================
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -17,27 +62,50 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Windows
 # =========================
-# Operating System Files
+*~
+# KDE directory preferences
+.directory
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
 # =========================
-
-# OSX
+# Eclipse Ignores
 # =========================
+*.pydevproject
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
 
-.DS_Store
-.AppleDouble
-.LSOverride
+# Eclipse Core
+.project
 
-# Thumbnails
-._*
+# External tool builders
+.externalToolBuilders/
 
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
+# Locally stored "Eclipse launch configurations"
+*.launch
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# CDT-specific
+.cproject
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# PDT-specific
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# TeXlipse plugin
+.texlipse
