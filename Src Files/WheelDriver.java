@@ -35,6 +35,14 @@ public class WheelDriver {
 	}
 	
 	//MOVEMENT METHODS////////////////////////////
+	/**
+	 * Moves the bot x distance at y speed
+	 * @param speed speed The speed in which the bot will move (0-255)
+	 * @param distance the distance that the bot will move (0+)
+	 */
+	public static void moveForwardDistance(int speed, int distance){
+		
+	}
 	
 	/**
 	 * Start all wheels in the forward direction.

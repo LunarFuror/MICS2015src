@@ -4,6 +4,7 @@
  * @author Grayson Lorenz
  *
  */
+	@SuppressWarnings("static-access")
 public class MovementLogic {
 	//////////////////////////////////////////////
 	//FIELDS//////////////////////////////////////
@@ -34,12 +35,13 @@ public class MovementLogic {
 	 * 
 	 * Starts the robot moving right until the sensor hits the opposite wall.
 	 */
+
 	public static void startFindBall(){
 		wheels.moveRight(speed);
 		while(!touchRight){}
 		wheels.stopMovement();
 		 
-		}
+	}
 	/**
 	 * 
 	 * While rear and front color sensors read black robot will move forward.
