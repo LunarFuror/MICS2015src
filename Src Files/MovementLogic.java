@@ -4,12 +4,17 @@
  * @author Grayson Lorenz
  *
  */
+	/**
+	 * @author austin
+	 *
+	 */
 	@SuppressWarnings("static-access")
 public class MovementLogic {
 	//////////////////////////////////////////////
 	//FIELDS//////////////////////////////////////
 	public static WheelDriver wheels;
 	public static int speed;
+	public static int dist;
 	public static boolean touchRight;
 	public static boolean touchLeft;
 	public static int colorFront;
@@ -30,18 +35,40 @@ public class MovementLogic {
 	//ACTION METHODS//////////////////////////////
 	
 	/**
-	 * @Author Austin Duppong
+	 * @Author Austin Duppong 
 	 * 
-	 * 
-	 * Starts the robot moving right until the sensor hits the opposite wall.
+	 * Starting in the left corner it will move right collecting balls along the wall until the sensor returns a true value.
 	 */
 
 	public static void startFindBall(){
 		wheels.moveRight(speed);
 		while(!touchRight){}
 		wheels.stopMovement();
-		 
+ 
 	}
+	
+	/**
+	 * Will align the robot to the hoop after picking up the balls. This is done by finding the center line and then moving forward x distance
+	 * to be in range of the hoop.
+	 */
+	public static void alignToHoop(){
+		wheels.moveLeft(speed);
+		while(colorFront == 0 && colorRear == 0){}
+		wheels.moveForwardDistance(speed, dist);
+		
+	}
+	
+	/**
+	 * Will move the robot to the left wall and down to the back wall to reset its position after the shots.
+	 */
+	public static void resetAfterShots(){
+		wheels.moveLeft(speed);
+		while( !touchLeft){}
+		wheels.moveBackwardDistance(speed, dist);
+		
+	}
+	
+	
 	/**
 	 * 
 	 * While rear and front color sensors read black robot will move forward.
@@ -51,6 +78,7 @@ public class MovementLogic {
 		while(colorFront == 2 && colorRear == 2){}
 		wheels.stopMovement();
 	}
+	
 	/**
 	 * 
 	 * While rear and front color sensors read black robot will move backward.
@@ -60,10 +88,9 @@ public class MovementLogic {
 		while(colorFront == 2 && colorRear == 2){}
 		wheels.stopMovement();
 	}
-	
-	
+
 	/**
-	 * Will move right until front color sensor reads something other than dWefault value.
+	 * Will move right until front color sensor reads something other than default value.
 	 * For finding the right line from the right wall.
 	 */
 	public static void findRightLineFromRight(){
@@ -74,16 +101,17 @@ public class MovementLogic {
 		
 	}
 	/**
-	 * Will move right until front color sensor reads something other than default value.
+	 * Will move right until front and rear color sensor reads something other than default value.
 	 * For finding the Center line from the right wall.
 	 */
 	public static void findCenterLineFromRight(){
-		wheels.moveRight(speed);
-		while(colorFront == 0){}
+		wheels.moveLeft(speed);
+		while(colorFront == 0 && colorRear == 0){}
+		wheels.stopMovement();
 		
 	}
 	
-	
+	// Austin Duppong Stop
 	
 
 	
