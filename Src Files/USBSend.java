@@ -46,13 +46,6 @@ public class USBSend {
 		//This is where the request magic happens.
 		inDat = new DataInputStream(conn.getInputStream());
 		outDat = new DataOutputStream(conn.getOutputStream());
-		try {
-			outDat.writeInt(0);
-			outDat.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		//might not need this part... gotta test it still.
 		while(true)
@@ -61,10 +54,8 @@ public class USBSend {
 			Scanner scan = new Scanner(System.in);
 			System.out.print("Type and push the enter:");
 			String thing = scan.next();
-			
-			
+						
 			//This sends a request for the sensor data, specifically the writeInt 1, be sure flush is in there
-			
 			requestSensorData();
 //			decode();
 		}
@@ -76,10 +67,10 @@ public class USBSend {
 	public static void requestSensorData(){
 		//This sends a request for the sensor data, specifically the writeInt 1, be sure flush is in there
 		try {
-			System.out.print("A ");
+			System.out.print("Writing ");
 			outDat.writeInt(1);
 			outDat.flush();
-			System.out.print("B ");
+			System.out.print("Written ");
 		} catch (IOException ioe) {
 			System.err.println("IO Exception writing bytes");
 		}
@@ -87,11 +78,11 @@ public class USBSend {
 		//This is where it tries to read the data sent back.
 		//except this for some reason isn't working ever.
 		try {		
-			System.out.println("Available is" + inDat.available());
+			System.out.println("Available is " + inDat.available());
 			while(inDat.available() != 0){}
+			System.out.println("Available is " + inDat.available());
 			if(inDat.available() != 0){
-				System.out.print("C ");
-				System.out.println("WE READ THE DO");
+				System.out.print("Reading ");
 				sensorCode = inDat.readInt();
 			}
 	    } catch (IOException ioe) {
