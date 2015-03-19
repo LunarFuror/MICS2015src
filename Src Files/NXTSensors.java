@@ -23,7 +23,7 @@ public class NXTSensors {
 
 	public static void main(String[] args) {
 		connect();
-		// Loops while running and connected
+		// Loops until you push da button.
 		while (!Button.ENTER.isDown()) {
 			// Waits for something to read
 
@@ -31,7 +31,7 @@ public class NXTSensors {
 			try {
 				// if read, sets the request to it.
 				if (dataIn.available() != 0){
-					System.out.print("A ");
+					System.out.print("Read ");
 					request = dataIn.readInt();
 				}
 			} catch (IOException e) {
@@ -44,14 +44,16 @@ public class NXTSensors {
 			// to break this up
 			// change this if to a switch.
 			if (request == 1) {
-				System.out.print("B ");
+				System.out.print("Requested ");
 				request = 0;
 				try {
 					// generate, write, print.
 					generateOutput();
+					System.out.print("Send ");
+					//this may be hanging
 					dataOut.writeInt(sensors);
 					dataOut.flush();
-					System.out.print("C ");
+					System.out.print("Sent ");
 					
 					System.out.print(" " + sensors);
 				} catch (IOException e) {
@@ -80,6 +82,7 @@ public class NXTSensors {
 	 * anyway. Why are you reading this? Don't you trust my work?
 	 */
 	public static void generateOutput() {
+		System.out.print("Generate ")
 		sensors = 0;
 		if (touchRightFront.isPressed())
 			sensors += 1;
