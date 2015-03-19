@@ -1,5 +1,10 @@
 //PC code
-
+/**
+ * @author Grayson Lorenz
+ * built on a heavily edited version of
+ * USBSend.java
+ * written by Lawrie Griffiths
+ */
 package fasdf;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
