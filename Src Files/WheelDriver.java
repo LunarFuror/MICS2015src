@@ -4,13 +4,21 @@
  * Fill in anything as needed, make clear notes either in here or preferrably on the Git.
  * Feel free to add your name to the author list when changes are made.
  * @author Grayson Lorenz
- *
+ * @author Brett Knecht
  */
+
+// add imports to make the things do the stuff -bk
+import java.util.Date;
+import com.pi4j.io.serial.Serial;
+import com.pi4j.io.serial.SerialDataEvent;
+import com.pi4j.io.serial.SerialDataListener;
+import com.pi4j.io.serial.SerialFactory;
+import com.pi4j.io.serial.SerialPortException;
 
 public class WheelDriver {
 	//////////////////////////////////////////////
 	//FIELDS//////////////////////////////////////
-	boolean frontRight;
+	{	boolean frontRight;
 	boolean frontLeft;
 	boolean backRight;
 	boolean backLeft;
@@ -18,7 +26,14 @@ public class WheelDriver {
 	int frontRightSpeed;
 	int frontLeftSpeed;
 	int backRightSpeed;
-	int backLeftSpeed;
+	int backLeftSpeed;}
+	
+	// Arrays that get sent to controller  {MOTORCONTROL, MOTORONHIGH, MOTORONLOW, ANGLEHIGH, ANGLELOW, ROTATIONHIGH, ROTATIONLOW, IGNOREDHIGH, IGNOREDLOW}
+	private static byte [] MAKEMOVEFORWARD = {0X03, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00};
+	private static byte [] MAKEMOVEREVERSE = {0X03, (byte)0xFF, (byte)0xFF, (byte)0xB4, (byte)0xB4, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00};
+	private static byte [] MAKEMOVELEFT = {0X03, (byte)0xFF, (byte)0xFF, (byte)0x10E, (byte)0x10E, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00};
+	private static byte [] MAKEMOVERIGHT = {0X03, (byte)0xFF, (byte)0xFF, (byte)0x5A, (byte)0x5A, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00};
+	private static byte [] STOPMOVE = {0X03, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00};
 	
 	//CONSTRUCTORS////////////////////////////////
 	
@@ -32,6 +47,13 @@ public class WheelDriver {
 		setFrontLeftSpeed(0);
 		setBackRightSpeed(0);
 		setBackLeftSpeed(0);
+		
+	    final byte ADRESS = 0x1E;
+	    final byte FULLMOTOR = (byte)0xFF;
+
+	  //First byte for system operation
+	    final byte CONFIG = 0X01;
+	    byte [] configuration = {CONFIG, 0x00, 0x11, 0x3C, FULLMOTOR, FULLMOTOR, FULLMOTOR, FULLMOTOR, FULLMOTOR, 0x01};
 	}
 	
 	//MOVEMENT METHODS////////////////////////////
@@ -59,7 +81,9 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public static void moveForward(int speed){
-		
+        serial.flush();
+        serial.write(MAKEMOVEFORWARD);
+        serial.flush();
 	}
 	
 	/**
@@ -67,7 +91,9 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public static void moveBackward(int speed){
-		
+        serial.flush();
+        serial.write(MAKEMOVEREVERSE);
+        serial.flush();
 	}
 	
 	/**
@@ -76,7 +102,9 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public static void moveLeft(int speed){
-		
+        serial.flush();
+        serial.write(MAKEMOVELEFT);
+        serial.flush();
 	}
 	
 	/**
@@ -85,7 +113,9 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public static void moveRight(int speed){
-		
+        serial.flush();
+        serial.write(MAKEMOVERIGHT);
+        serial.flush();
 	}
 	
 	/**
@@ -115,7 +145,9 @@ public class WheelDriver {
 	 * Stop all wheel movement
 	 */
 	public static void stopMovement(){
-	
+        serial.flush();
+        serial.write(STOPMOVE);
+        serial.flush();
 	}
 
 	//GETTERS AND SETTERS/////////////////////////
