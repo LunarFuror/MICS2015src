@@ -55,6 +55,7 @@ public class WheelDriver {
 	    final byte CONFIG = 0X01;
 	    byte [] configuration = {CONFIG, 0x00, 0x11, 0x3C, FULLMOTOR, FULLMOTOR, FULLMOTOR, FULLMOTOR, FULLMOTOR, 0x01};
 	}
+	 	final Serial serial = SerialFactory.createInstance();
 	
 	//MOVEMENT METHODS////////////////////////////
 	
@@ -81,6 +82,7 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public static void moveForward(int speed){
+		serial.open(Serial.DEFAULT_COM_PORT, 9600);
         serial.flush();
         serial.write(MAKEMOVEFORWARD);
         serial.flush();
@@ -91,6 +93,7 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public static void moveBackward(int speed){
+		serial.open(Serial.DEFAULT_COM_PORT, 9600);
         serial.flush();
         serial.write(MAKEMOVEREVERSE);
         serial.flush();
@@ -102,6 +105,7 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public static void moveLeft(int speed){
+		serial.open(Serial.DEFAULT_COM_PORT, 9600);
         serial.flush();
         serial.write(MAKEMOVELEFT);
         serial.flush();
@@ -113,6 +117,7 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public static void moveRight(int speed){
+		serial.open(Serial.DEFAULT_COM_PORT, 9600);
         serial.flush();
         serial.write(MAKEMOVERIGHT);
         serial.flush();
@@ -145,6 +150,7 @@ public class WheelDriver {
 	 * Stop all wheel movement
 	 */
 	public static void stopMovement(){
+		serial.open(Serial.DEFAULT_COM_PORT, 9600);
         serial.flush();
         serial.write(STOPMOVE);
         serial.flush();
