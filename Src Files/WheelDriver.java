@@ -29,11 +29,11 @@ public class WheelDriver {
 	int backLeftSpeed;}
 	
 	// Arrays that get sent to controller  {MOTORCONTROL, MOTORONHIGH, MOTORONLOW, ANGLEHIGH, ANGLELOW, ROTATIONHIGH, ROTATIONLOW, IGNOREDHIGH, IGNOREDLOW}
-	private static byte [] MAKEMOVEFORWARD = {0X03, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00};
-	private static byte [] MAKEMOVEREVERSE = {0X03, (byte)0xFF, (byte)0xFF, (byte)0xB4, (byte)0xB4, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00};
-	private static byte [] MAKEMOVELEFT = {0X03, (byte)0xFF, (byte)0xFF, (byte)0x10E, (byte)0x10E, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00};
-	private static byte [] MAKEMOVERIGHT = {0X03, (byte)0xFF, (byte)0xFF, (byte)0x5A, (byte)0x5A, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00};
-	private static byte [] STOPMOVE = {0X03, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00};
+	private static byte [] MAKEMOVEFORWARD = {0X03, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00};
+	private static byte [] MAKEMOVEREVERSE = {0X03, (byte)0xFF, (byte)0xFF, (byte)0xB4, (byte)0xB4, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00};
+	private static byte [] MAKEMOVELEFT = {0X03, (byte)0xFF, (byte)0xFF, (byte)0x10E, (byte)0x10E, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00};
+	private static byte [] MAKEMOVERIGHT = {0X03, (byte)0xFF, (byte)0xFF, (byte)0x5A, (byte)0x5A, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00};
+	private static byte [] STOPMOVE = {0X03, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00};
 	
 	//CONSTRUCTORS////////////////////////////////
 	
