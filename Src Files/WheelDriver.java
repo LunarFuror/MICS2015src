@@ -23,10 +23,7 @@ public class WheelDriver {
 	boolean backRight;
 	boolean backLeft;
 	
-	int frontRightSpeed;
-	int frontLeftSpeed;
-	int backRightSpeed;
-	int backLeftSpeed;}
+
 	
 	// Arrays that get sent to controller  {MOTORCONTROL, MOTORONHIGH, MOTORONLOW, ANGLEHIGH, ANGLELOW, ROTATIONHIGH, ROTATIONLOW, IGNOREDHIGH, IGNOREDLOW}
 	private static byte [] MAKEMOVEFORWARD = {0X03, (byte)0xFF, (byte)0xFF, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00};
@@ -43,10 +40,6 @@ public class WheelDriver {
 		setBackRight(false);
 		setBackLeft(false);
 		
-		setFrontRightSpeed(0);
-		setFrontLeftSpeed(0);
-		setBackRightSpeed(0);
-		setBackLeftSpeed(0);
 		
 	    final byte ADRESS = 0x1E;
 	    final byte FULLMOTOR = (byte)0xFF;
@@ -64,7 +57,7 @@ public class WheelDriver {
 	 * @param speed speed The speed in which the bot will move (0-255)
 	 * @param distance the distance that the bot will move (0+)
 	 */
-	public static void moveForwardDistance(int speed, int dist){
+	public static void moveForwardDistance(int dist){
 		
 	}
 	
@@ -73,7 +66,7 @@ public class WheelDriver {
 	 * @param speed speed speed The speed in which the bot will move (0-255)
 	 * @param dist distance the distance that the bot will move (0+)
 	 */
-	public static void moveBackwardDistance(int speed, int dist){
+	public static void moveBackwardDistance(int dist){
 		
 	}
 	
@@ -81,22 +74,22 @@ public class WheelDriver {
 	 * Start all wheels in the forward direction.
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
-	public static void moveForward(int speed){
+	public static void moveForward(){
 		serial.open(Serial.DEFAULT_COM_PORT, 9600);
-        serial.flush();
-        serial.write(MAKEMOVEFORWARD);
-        serial.flush();
+        	serial.flush();
+        	serial.write(MAKEMOVEFORWARD);
+        	serial.flush();
 	}
 	
 	/**
 	 * Start all wheels in the reverse direction.
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
-	public static void moveBackward(int speed){
+	public static void moveBackward(){
 		serial.open(Serial.DEFAULT_COM_PORT, 9600);
-        serial.flush();
-        serial.write(MAKEMOVEREVERSE);
-        serial.flush();
+        	serial.flush();
+        	serial.write(MAKEMOVEREVERSE);
+		serial.flush();
 	}
 	
 	/**
@@ -104,11 +97,11 @@ public class WheelDriver {
 	 * Causing the robot to slide to the left using Omniwheels
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
-	public static void moveLeft(int speed){
+	public static void moveLeft(){
 		serial.open(Serial.DEFAULT_COM_PORT, 9600);
-        serial.flush();
-        serial.write(MAKEMOVELEFT);
-        serial.flush();
+		serial.flush();
+		serial.write(MAKEMOVELEFT);
+        	serial.flush();
 	}
 	
 	/**
@@ -116,11 +109,11 @@ public class WheelDriver {
 	 * Causing the robot to slide to the right using Omniwheels
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
-	public static void moveRight(int speed){
-		serial.open(Serial.DEFAULT_COM_PORT, 9600);
-        serial.flush();
-        serial.write(MAKEMOVERIGHT);
-        serial.flush();
+	public static void moveRight(){
+	 	serial.open(Serial.DEFAULT_COM_PORT, 9600);
+	 	serial.flush();
+	 	serial.write(MAKEMOVERIGHT);
+         	serial.flush();
 	}
 	
 	/**
@@ -130,7 +123,7 @@ public class WheelDriver {
 	 * RIGHT FORWARD
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
-	public static void turnLeft(int speed){
+	public static void turnLeft(){
 		
 	}
 	
@@ -142,7 +135,7 @@ public class WheelDriver {
 	 * RIGHT REVERSE 
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
-	public static void turnRight(int speed){
+	public static void turnRight(){
 		
 	}
 	
@@ -150,10 +143,10 @@ public class WheelDriver {
 	 * Stop all wheel movement
 	 */
 	public static void stopMovement(){
-		serial.open(Serial.DEFAULT_COM_PORT, 9600);
-        serial.flush();
-        serial.write(STOPMOVE);
-        serial.flush();
+	 	serial.open(Serial.DEFAULT_COM_PORT, 9600);
+		serial.flush();
+		serial.write(STOPMOVE);
+		serial.flush();
 	}
 
 	//GETTERS AND SETTERS/////////////////////////
@@ -215,61 +208,5 @@ public class WheelDriver {
 	 */
 	public void setBackLeft(boolean backLeft) {
 		this.backLeft = backLeft;
-	}
-
-	/**
-	 * @return the frontRightSpeed
-	 */
-	public int getFrontRightSpeed() {
-		return frontRightSpeed;
-	}
-
-	/**
-	 * @param frontRightSpeed the frontRightSpeed to set
-	 */
-	public void setFrontRightSpeed(int frontRightSpeed) {
-		this.frontRightSpeed = frontRightSpeed;
-	}
-
-	/**
-	 * @return the frontLeftSpeed
-	 */
-	public int getFrontLeftSpeed() {
-		return frontLeftSpeed;
-	}
-
-	/**
-	 * @param frontLeftSpeed the frontLeftSpeed to set
-	 */
-	public void setFrontLeftSpeed(int frontLeftSpeed) {
-		this.frontLeftSpeed = frontLeftSpeed;
-	}
-
-	/**
-	 * @return the backRightSpeed
-	 */
-	public int getBackRightSpeed() {
-		return backRightSpeed;
-	}
-
-	/**
-	 * @param backRightSpeed the backRightSpeed to set
-	 */
-	public void setBackRightSpeed(int backRightSpeed) {
-		this.backRightSpeed = backRightSpeed;
-	}
-
-	/**
-	 * @return the backLeftSpeed
-	 */
-	public int getBackLeftSpeed() {
-		return backLeftSpeed;
-	}
-
-	/**
-	 * @param backLeftSpeed the backLeftSpeed to set
-	 */
-	public void setBackLeftSpeed(int backLeftSpeed) {
-		this.backLeftSpeed = backLeftSpeed;
 	}
 }
