@@ -19,7 +19,7 @@ public class MovementLogic {
 	public static boolean touchLeft;
 	public static int colorFront;
 	public static int colorRear;
-	//  ints for the color sensors: 0 default, 1 = red , 2 = black
+	//  ints for the color sensors: 0 white, 1 = red , 2 = black
 	
 	
 	//CONSTRUCTORS////////////////////////////////
@@ -41,7 +41,7 @@ public class MovementLogic {
 	 */
 
 	public static void startFindBall(){
-		wheels.moveRight(speed);
+		wheels.moveRight();
 		while(!touchRight){}
 		wheels.stopMovement();
  
@@ -52,19 +52,20 @@ public class MovementLogic {
 	 * to be in range of the hoop.
 	 */
 	public static void alignToHoop(){
-		wheels.moveLeft(speed);
+		wheels.moveLeft();
 		while(colorFront == 0 && colorRear == 0){}
-		wheels.moveForwardDistance(speed, dist);
-		
+		wheels.moveForward();
+		while(colorFront != 1){}
+		wheels.stopMovement();
 	}
 	
 	/**
 	 * Will move the robot to the left wall and down to the back wall to reset its position after the shots.
 	 */
 	public static void resetAfterShots(){
-		wheels.moveLeft(speed);
+		wheels.moveLeft();
 		while( !touchLeft){}
-		wheels.moveBackwardDistance(speed, dist);
+		wheels.moveBackward();
 		
 	}
 	
@@ -72,19 +73,22 @@ public class MovementLogic {
 	/**
 	 * 
 	 * While rear and front color sensors read black robot will move forward.
+	 * This is for moving up the center line
 	 */
-	public static void followLineForward(){
-		wheels.moveForward(speed);
+	public static void followCenterLineForward(){
+		wheels.moveForward();
 		while(colorFront == 2 && colorRear == 2){}
 		wheels.stopMovement();
 	}
 	
+	
 	/**
 	 * 
 	 * While rear and front color sensors read black robot will move backward.
+	 * This is for moving backward on the center line.
 	 */
-	public static void followLineBackward(){
-		wheels.moveBackward(speed);
+	public static void followCenterLineBackward(){
+		wheels.moveBackward();
 		while(colorFront == 2 && colorRear == 2){}
 		wheels.stopMovement();
 	}
@@ -94,10 +98,10 @@ public class MovementLogic {
 	 * For finding the right line from the right wall.
 	 */
 	public static void findRightLineFromRight(){
-		wheels.moveLeft(speed);
+		wheels.moveLeft();
 		while(colorFront == 0){} 
 		wheels.stopMovement();
-		// need to move back sensor over line not sure how at the moment
+		
 		
 	}
 	/**
@@ -105,13 +109,12 @@ public class MovementLogic {
 	 * For finding the Center line from the right wall.
 	 */
 	public static void findCenterLineFromRight(){
-		wheels.moveLeft(speed);
+		wheels.moveLeft();
 		while(colorFront == 0 && colorRear == 0){}
 		wheels.stopMovement();
 		
 	}
-	
-	// Austin Duppong Stop
+
 	
 
 	
