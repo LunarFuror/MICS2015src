@@ -1,4 +1,4 @@
-package org.lejos.pcsample.usbsend;
+//package org.lejos.pcsample.usbsend;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -24,11 +24,12 @@ import lejos.pc.comm.NXTConnector;
  * @author Lawrie Griffiths
  *
  */
-public class USBSendOriginal {
+public class USBSend {
 	public static NXTConnector conn = new NXTConnector();
 	public static DataInputStream inDat;
 	public static DataOutputStream outDat;
-	public static void main(String[] args) {
+	
+	public USBSend() {
 	
 		conn.addLogListener(new NXTCommLogListener() {
 			public void logEvent(String message) {
@@ -48,24 +49,10 @@ public class USBSendOriginal {
 		outDat = new DataOutputStream(conn.getOutputStream());
 		
 		//Call and get dat shit.
-			getSensor();
-
-		try {
-			inDat.close();
-			outDat.close();
-			System.out.println("Closed data streams");
-		} catch (IOException ioe) {
-			System.err.println("IO Exception Closing connection");
-		}
-		try {
-			conn.close();
-			System.out.println("Closed connection");
-		} catch (IOException ioe) {
-			System.err.println("IO Exception Closing connection");
-		}
+			//getSensor();
 	}
 	
-	public static void getSensor(){
+	public static int getSensor(){
 		int x = 0;
 		try {
 			outDat.writeInt(1);
@@ -79,5 +66,22 @@ public class USBSendOriginal {
 			System.err.println("IO Exception reading reply");
 		}
 		System.out.println("Sent " + 1 + " Received " + x);
+		send x;
+	}
+	
+	public static void closeStreams(){
+		try {
+			inDat.close();
+			outDat.close();
+			System.out.println("Closed data streams");
+		} catch (IOException ioe) {
+			System.err.println("IO Exception Closing connection");
+		}
+		try {
+			conn.close();
+			System.out.println("Closed connection");
+		} catch (IOException ioe) {
+			System.err.println("IO Exception Closing connection");
+		}
 	}
 }
