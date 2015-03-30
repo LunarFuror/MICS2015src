@@ -18,7 +18,7 @@ public class ConveyorLogic {
 	
 	
 	//GETTERS AND SETTERS/////////////////////////
-	public static String ToString(){
+	public String ToString(){
 		return "CONVEYOR: output";
 	}
 	
