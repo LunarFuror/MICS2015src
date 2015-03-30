@@ -45,24 +45,17 @@ public class MovementLogic {
 	 *	Just a thing to test the sensors with rolling frame or w/e we need it for
 	 */
 	public static void testRun(){
-		wheels.moveRight;
-		while(!touchFrontRight() || !touchBackRight()){}
+		wheels.moveRight();
+		while(!touchFrontRight()){}
 		wheels.stopMovement();
 		
-		wheels.moveBackward();
-		while(!touchBackRight() || !touchBackLeft()){}
-		wheels.stopMovement();
+		wheels.moveBack();
+		while(!touchFrontRight()){}
+		wheels.stopmovement();
 		
 		wheels.moveLeft();
-		while(!touchFrontLeft() || !touchBackLeft()){}
+		while(!touchFrontRight()){}
 		wheels.stopMovement();
-		
-		wheels.moveRight();
-		while(colorFront() == 0){}
-		while(colorFront() == 0){}
-		Wheels.stopMovement();
-		
-		send.closeStreams();
 	}
 	
 	/**
