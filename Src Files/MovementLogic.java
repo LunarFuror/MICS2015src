@@ -155,60 +155,60 @@ public class MovementLogic {
 			// COLOR BACK
 			if ((sensors - 128) >= 0) {
 				sensors -= 128;
-				System.out.println("COLOR BACK : BLACK");
+				//System.out.println("COLOR BACK : BLACK");
 			} else if ((sensors - 64) >= 0) {
 				sensors -= 64;
-				System.out.println("COLOR BACK : RED");
+				//System.out.println("COLOR BACK : RED");
 			} else
-				System.out.println("COLOR BACK : white");
+				//System.out.println("COLOR BACK : white");
 			
 			// COLOR FRONT
 			if ((sensors - 32) >= 0) {
 				sensors -= 32;
-				System.out.println("COLOR FRONT : BLACK");
+				//System.out.println("COLOR FRONT : BLACK");
 				colorFront = 2;
 			} else if ((sensors - 16) >= 0) {
 				sensors -= 16;
-				System.out.println("COLOR FRONT : RED");
+				//System.out.println("COLOR FRONT : RED");
 				colorFront = 1;
 			} else
-				System.out.println("COLOR BACK : white");
+				//System.out.println("COLOR BACK : white");
 				colorFront = 0;
 			
 			// TOUCH BACK LEFT
 			if ((sensors - 8) >= 0) {
 				sensors -= 8;
-				System.out.println("TOUCH BACK LEFT : TRUE");
+				//System.out.println("TOUCH BACK LEFT : TRUE");
 				touchBackLeft = true;
 			} else
-				System.out.println("TOUCH BACK LEFT : false");
+				//System.out.println("TOUCH BACK LEFT : false");
 				touchBackLeft = false;
 			
 			// TOUCH BACK RIGHT
 			if ((sensors - 4) >= 0) {
 				sensors -= 4;
-				System.out.println("TOUCH BACK RIGHT : TRUE");
+				//System.out.println("TOUCH BACK RIGHT : TRUE");
 				touchBackRight = true;
 			} else
-				System.out.println("TOUCH BACK RIGHT : false");
+				//System.out.println("TOUCH BACK RIGHT : false");
 				touchBackRight = false;
 			
 			// TOUCH FRONT LEFT
 			if ((sensors - 2) >= 0) {
 				sensors -= 2;
-				System.out.println("TOUCH FRONT LEFT : TRUE");
+				//System.out.println("TOUCH FRONT LEFT : TRUE");
 				touchFrontLeft = true;
 			} else
-				System.out.println("TOUCH FRONT LEFT : false");
+				//System.out.println("TOUCH FRONT LEFT : false");
 				touchFrontLeft = false;
 			
 			// TOUCH FRONT RIGHT
 			if ((sensors - 1) >= 0) {
 				sensors -= 1;
-				System.out.println("TOUCH FRONT RIGHT : TRUE");
+				//System.out.println("TOUCH FRONT RIGHT : TRUE");
 				touchFrontRight = true;
 			} else
-				System.out.println("TOUCH FRONT RIGHT : false");
+				//System.out.println("TOUCH FRONT RIGHT : false");
 				touchFrontRight = false;
 		}
 	}
