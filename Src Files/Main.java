@@ -11,13 +11,8 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		//Wait for some input.
-		//Search for ball(s)
-		//Search for Center line
-		//Search for Red Line / hoop
-		//Distribute ball directly into hoop like a boss
-		//Loop until something happens.
-		//Dance
+		MovementLogic move = new MovementLogic();
+		move.testRun();
 	}
 	
 	//////////////////////////////////////////////
