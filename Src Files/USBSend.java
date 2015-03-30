@@ -61,7 +61,7 @@ public class USBSend {
 			System.err.println("IO Exception reading reply");
 		}
 		System.out.println("Sent " + 1 + " Received " + x);
-		send x;
+		return x;
 	}
 	
 	public static void closeStreams(){
