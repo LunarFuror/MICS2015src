@@ -49,9 +49,9 @@ public class MovementLogic {
 		while(!touchFrontRight()){}
 		wheels.stopMovement();
 		
-		wheels.moveBack();
+		wheels.moveBackward();
 		while(!touchFrontRight()){}
-		wheels.stopmovement();
+		wheels.stopMovement();
 		
 		wheels.moveLeft();
 		while(!touchFrontRight()){}
