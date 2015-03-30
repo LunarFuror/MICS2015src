@@ -47,9 +47,6 @@ public class USBSend {
 		}
 		inDat = new DataInputStream(conn.getInputStream());
 		outDat = new DataOutputStream(conn.getOutputStream());
-		
-		//Call and get dat shit.
-			//getSensor();
 	}
 	
 	public static int getSensor(){
