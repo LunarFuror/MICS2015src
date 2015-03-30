@@ -21,7 +21,7 @@ public class ConveyorDriver {
 	
 	
 	//GETTERS AND SETTERS/////////////////////////
-	public static String ToString(){
+	public String ToString(){
 		return "CONVEYOR DRIVER: output";
 	}
 }
