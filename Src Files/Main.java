@@ -6,7 +6,6 @@
  * @author Grayson Lorenz
  *
  */
-//import sensors, servos, motors, w/e else
 public class Main {
 	
 	public static void main(String[] args) {
