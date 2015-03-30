@@ -68,7 +68,6 @@ public class WheelDriver {
 	
 	/**
 	 * Moves the bot x distance at y speed
-	 * @param speed speed The speed in which the bot will move (0-255)
 	 * @param distance the distance that the bot will move (0+)
 	 */
 	public void moveForwardDistance(int dist){
@@ -77,10 +76,25 @@ public class WheelDriver {
 	
 	/**
 	 * Moves the bot x distance at y speed
-	 * @param speed speed speed The speed in which the bot will move (0-255)
 	 * @param dist distance the distance that the bot will move (0+)
 	 */
 	public void moveBackwardDistance(int dist){
+		
+	}
+	
+	/**
+	 * Moves the bot x distance at y speed
+	 * @param dist distance the distance that the bot will move (0+)
+	 */
+	public void moveLeftDistance(int dist){
+		
+	}
+	
+	/**
+	 * Moves the bot x distance at y speed
+	 * @param dist distance the distance that the bot will move (0+)
+	 */
+	public void moveRightDistance(int dist){
 		
 	}
 	
@@ -101,7 +115,7 @@ public class WheelDriver {
 	 */
 	public void moveBackward(){
 		openSerial();
-    serial.write(MAKEMOVEREVERSE);
+    		serial.write(MAKEMOVEREVERSE);
 		serial.flush();
 		closeSerial();
 	}
@@ -114,7 +128,7 @@ public class WheelDriver {
 	public void moveLeft(){
 		openSerial();
 		serial.write(MAKEMOVELEFT);
-    serial.flush();
+		serial.flush();
 		closeSerial();
 	}
 	
@@ -126,7 +140,7 @@ public class WheelDriver {
 	public void moveRight(){
 	 	openSerial();
 	 	serial.write(MAKEMOVERIGHT);
-    serial.flush();
+    		serial.flush();
 		closeSerial();
 	}
 	
