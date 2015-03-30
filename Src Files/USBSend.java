@@ -7,9 +7,6 @@ import lejos.pc.comm.NXTCommLogListener;
 import lejos.pc.comm.NXTConnector;
 
 /**
- * This is a PC sample. It connects to the NXT, and then sends an integer and
- * waits for a reply, 100 times.
- *
  * Compile this program with javac (not nxjc), and run it with java.
  *
  * You need pccomm.jar on the CLASSPATH and the jfantom.dll DLL or liblibnxt.so
@@ -22,6 +19,7 @@ import lejos.pc.comm.NXTConnector;
  * Your NXT should be running a sample such as USBReceive.
  *
  * @author Lawrie Griffiths
+ * Modified by Grayson Lorenz
  *
  */
 public class USBSend {
