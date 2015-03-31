@@ -29,18 +29,18 @@ public class USBSend {
 	
 	public USBSend() {
 		conn.addLogListener(new NXTCommLogListener() {
--			public void logEvent(String message) {
--				System.out.println("USBSend Log.listener: " + message);
--			}
--
--			public void logEvent(Throwable throwable) {
--				System.out.println("USBSend Log.listener - stack trace: ");
--				throwable.printStackTrace();
--			}
--		});
--		if (!conn.connectTo("usb://")) {
--		System.err.println("No NXT found using USB");
--		System.exit(1);
+			public void logEvent(String message) {
+				System.out.println("USBSend Log.listener: " + message);
+			}
+
+			public void logEvent(Throwable throwable) {
+				System.out.println("USBSend Log.listener - stack trace: ");
+				throwable.printStackTrace();
+			}
+		});
+		if (!conn.connectTo("usb://")) {
+		System.err.println("No NXT found using USB");
+		System.exit(1);
 		inDat = new DataInputStream(conn.getInputStream());
 		outDat = new DataOutputStream(conn.getOutputStream());
 	}
