@@ -11,7 +11,10 @@ public class Main {
 	public static void main(String[] args) {
 		
 		USBSend send = new USBSend();
-		System.out.println(send.getSensor);
+		for(int i = 0; i < 500; i++){
+			System.out.println(send.getSensor());
+		}
+		send.closeStreams();
 	}
 	
 	//////////////////////////////////////////////
