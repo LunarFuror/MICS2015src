@@ -38,31 +38,37 @@ public class USBSend {
 				throwable.printStackTrace();
 			}
 		});
+		
 		if (!conn.connectTo("usb://")) {
-		System.err.println("No NXT found using USB");
-		System.exit(1);
-		inDat = new DataInputStream(conn.getInputStream());
-		outDat = new DataOutputStream(conn.getOutputStream());
+			System.err.println("No NXT found using USB");
+			System.exit(1);
+			inDat = new DataInputStream(conn.getInputStream());
+			outDat = new DataOutputStream(conn.getOutputStream());
+		}
 	}
 	
 	public static int getSensor(){
 		int x = 0;
+		//try to write out
 		try {
 			outDat.writeInt(1);
 			outDat.flush();
 		} catch (IOException ioe) {
 			System.err.println("IO Exception writing bytes");
 		}
+		//try to read response
 		try {
 			x = inDat.readInt();
 		} catch (IOException ioe) {
 			System.err.println("IO Exception reading reply");
 		}
-		System.out.println("Sent " + 1 + " Received " + x);
+		//print response and return it
+		//System.out.println("Sent " + 1 + " Received " + x);
 		return x;
 	}
 	
 	public static void closeStreams(){
+		//try to close all the streams
 		try {
 			inDat.close();
 			outDat.close();
@@ -70,6 +76,7 @@ public class USBSend {
 		} catch (IOException ioe) {
 			System.err.println("IO Exception Closing connection");
 		}
+		
 		try {
 			conn.close();
 			System.out.println("Closed connection");
