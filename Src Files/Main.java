@@ -10,8 +10,8 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		MovementLogic move = new MovementLogic();
-		move.testRun();
+		USBSend send = new USBSend();
+		System.out.println(send.getSensor);
 	}
 	
 	//////////////////////////////////////////////
