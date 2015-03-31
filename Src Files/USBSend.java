@@ -42,9 +42,9 @@ public class USBSend {
 		if (!conn.connectTo("usb://")) {
 			System.err.println("No NXT found using USB");
 			System.exit(1);
+		}
 			inDat = new DataInputStream(conn.getInputStream());
 			outDat = new DataOutputStream(conn.getOutputStream());
-		}
 	}
 	
 	public static int getSensor(){
