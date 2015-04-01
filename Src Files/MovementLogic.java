@@ -22,6 +22,7 @@ public class MovementLogic {
 	public static int colorRear;
 	public static int sensors = 0;
 	public static USBsend send;
+	public static int lastColor;
 	//  ints for the color sensors: 0 white, 1 = red , 2 = black
 	
 	
@@ -29,6 +30,7 @@ public class MovementLogic {
 	public MovementLogic(){
 		send = new USBsend();
 		speed = 100;
+		lastColor = 0;
 		wheels = new WheelDriver();
 		touchFrontRight = false;
 		touchFrontLeft = false;
