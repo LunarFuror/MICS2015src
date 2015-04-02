@@ -1,6 +1,6 @@
 //NXT code
 
-package fasdf;
+package Robot;
 
 import java.io.*;
 
@@ -12,15 +12,16 @@ public class NXTSensors {
 	public static DataOutputStream dataOut;
 	public static DataInputStream dataIn;
 	public static USBConnection USBLink;
-	public static TouchSensor touchRightFront = new TouchSensor(SensorPort.S1);
-	public static TouchSensor touchLeftFront = new TouchSensor(SensorPort.S2);
-	public static TouchSensor touchRightBack = new TouchSensor(SensorPort.S3);
-	public static TouchSensor touchLeftBack = new TouchSensor(SensorPort.S4);//multiplexer 1
-//    public static ColorSensor colorFront = new ColorSensor(SensorPort.S3);//multiplexer 2
+	public static TouchSensor touchRightFront = new TouchSensor(SensorPort.S2);
+	public static TouchSensor touchLeftFront = new TouchSensor(SensorPort.S3);
+//	public static TouchSensor touchRightBack = new TouchSensor(SensorPort.S3);
+//	public static TouchSensor touchLeftBack = new TouchSensor(SensorPort.S4);//multiplexer 1
+    public static ColorSensor colorFront = new ColorSensor(SensorPort.S1);//multiplexer 2
 //    public static ColorSensor colorBack = new ColorSensor(SensorPort.S6);//multiplexer 3
 	public static int request = 0;
 	public static int sensors = 0;
-
+	public static TSM touchMulti = new TSM(SensorPort.S4);
+	
 	public static void main(String[] args) {
 		connect();
 		// Loops until you push da button.
@@ -84,23 +85,25 @@ public class NXTSensors {
 	public static void generateOutput() {
 		System.out.print("Generate ");
 		sensors = 0;
+		int response = touchMulti.readSensors();
+		
 		if (touchRightFront.isPressed())
 			sensors += 1;
 		
 		if (touchLeftFront.isPressed())
 			sensors += 2;
 		
-		if (touchRightBack.isPressed())
+		if ((response & 1) == 1)
 			sensors += 4;
 		
-		if (touchLeftBack.isPressed())
+		if ((response & 2) == 2)
 			sensors += 8;
 		
-//		if (colorFront.getColorID() == Color.RED)
-//			sensors += 16;
-//		
-//		if (colorFront.getColorID() == Color.BLACK)
-//			sensors += 32;
+		if (colorFront.getColorID() == Color.RED)
+			sensors += 16;
+		
+		if (colorFront.getColorID() == Color.BLACK)
+			sensors += 32;
 		
 //		if (colorBack.getColorID() == Color.RED)
 //			sensors += 64;
