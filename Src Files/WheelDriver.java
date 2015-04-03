@@ -29,7 +29,7 @@ public class WheelDriver {
 	private final byte MOTOR_SPIN_DEFAULT_SPEED = (byte)0x0F;
 	
 	//will be used to store the bus
-	private I2Device motorController;
+	private I2CDevice motorController;
 	
 	//byte array to send for motor commands
 	private byte [] motorCommand = {STOP_BYTE, MOTOR_OFF};

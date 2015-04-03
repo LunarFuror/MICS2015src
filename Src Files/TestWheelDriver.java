@@ -11,7 +11,7 @@ public class TestWheelDriver
 		try
 		{
 			Scanner in = new Scanner(System.in);
-			final I2CBus bus = new I2CFactory.getInstance(I2CBus.BUS_1);
+			final I2CBus bus = I2CFactory.getInstance(I2CBus.BUS_1);
 			I2CDevice arduino = bus.getDevice(0x04);
 		
 			WheelDriver wheelDrive = new WheelDriver(arduino);
