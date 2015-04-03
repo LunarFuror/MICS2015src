@@ -21,6 +21,15 @@ void setup()
   Wire.begin(4);                // join i2c bus with address #4
   Wire.onReceive(receiveEvent); // register event
   Serial.begin(9600);           // start serial for output
+  pinMode(MotPin1, OUTPUT);
+  pinMode(MotPin1PWM, OUTPUT);
+  pinMode(MotPin2, OUTPUT);
+  pinMode(MotPin2PWM, OUTPUT);
+  pinMode(MotPin3, OUTPUT);
+  pinMode(MotPin3PWM, OUTPUT);
+  pinMode(MotPin4, OUTPUT);
+  pinMode(MotPin4PWM, OUTPUT);
+  
 }
 
 void loop()
