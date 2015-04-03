@@ -18,7 +18,7 @@ public class TestWheelDriver
 			
 			while (true)
 			{
-				System.out.println("Select what you would like me to do.")
+				System.out.println("Select what you would like me to do.");
 				System.out.println("q - stop motor, w - Up, s - Down, a - Left, d - Right, z - rotate left, x - rotate right, e - load conveyor, t - stop conveyor, r - release");
 				char com = in.next().charAt(0);
 				
