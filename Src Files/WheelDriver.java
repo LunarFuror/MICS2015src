@@ -60,9 +60,17 @@ public class WheelDriver {
 	*/
 	public void makeMove(byte direction, byte speed)
 	{
-		motorCommand[0] = direction;
-		motorCommand[1] = speed;
-		motorController.write(motorCommand, 0, motorCommand.length);
+		try
+		{
+		
+			motorCommand[0] = direction;
+			motorCommand[1] = speed;
+			motorController.write(motorCommand, 0, motorCommand.length);
+		}
+		catch(Exception ex)
+		{
+			System.out.println("Error Sending makemove");
+		}
 	}
 	
 	/**
