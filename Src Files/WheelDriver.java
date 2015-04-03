@@ -8,35 +8,32 @@
  */
 
 // add imports to make the things do the stuff -bk
-import java.util.Date;
-import com.pi4j.io.serial.Serial;
-import com.pi4j.io.serial.SerialDataEvent;
-import com.pi4j.io.serial.SerialDataListener;
-import com.pi4j.io.serial.SerialFactory;
-import com.pi4j.io.serial.SerialPortException;
+import com.pi4j.io.i2c.I2CBus;
+import com.pi4j.io.i2c.I2CDevice;
+import com.pi4j.io.i2c.I2CFactory;
 
 public class WheelDriver {
 
 	//Constants
-	private final byte MOTORCONTROLCOMMAND = (byte)0x03; //command code for motor control
-	private final byte MOTORSPEEDHIGH = (byte)0x00; //Motor speed high Byte
-	private final byte MOTORSPEEDLOW = (byte) 0xFF; //Motor speed low byte	
-	private final byte MOTORSTOPHIGH = (byte)0x00;
-	private final byte MOTORSTOPLOW = (byte)0x00;
-	private final byte FORWARDHIGH = (byte)0x00;
-	private final byte FORWARDLOW = (byte)0x00;
-	private final byte RIGHTHIGH = (byte)0x5A;
-	private final byte RIGHTLOW = (byte)0x00;
-	private final byte REVERSEHIGH = (byte)0x00;
-	private final byte REVERSELOW = (byte)0xB4;
-	private final byte LEFTHIGH = (byte)0x01;
-	private final byte LEFTLOW = (byte)0x0E;
-	private final byte ROTATIONHIGH = (byte)0x00;
-	private final byte ROTATIONLOW = (byte)0x00;
-	private final byte NOTREQUIREDHIGH = (byte)0x00;
-	private final byte NOTREQUIREDLOW = (byte)0x00;
-	private final int BAUDRATE = 9600;
-	private final Serial serial = SerialFactory.createInstance();
+	private final byte STOP_BYTE = 0x00;
+	private final byte FORWARD_BYTE = 0x01;
+	private final byte BACKWARD_BYTE = 0x02;
+	private final byte LEFT_BYTE = 0x03;
+	private final byte RIGHT_BYTE = 0x04;
+	private final byte SPIN_RIGHT_BYTE = 0x05;
+	private final byte SPIN_LEFT_BYTE = 0x06;
+	private final byte MOTOR_FULL = (byte) 0xFF;
+	private final byte MOTOR_HALF = (byte) 0x0F;
+	private final byte MOTOR_OFF = (byte) 0x00;
+	private final byte MOTOR_LEFTRIGHT_DEFAULT = (byte)0x0C;
+	private final byte MOTOR_FORWARD_BACKWARD_DEFAULT = (byte) 0xFF;
+	private final byte MOTOR_SPIN_DEFAULT_SPEED = (byte)0x0F;
+	
+	//will be used to store the bus
+	private I2Device motorController;
+	
+	//byte array to send for motor commands
+	private byte [] motorCommand = {STOP_BYTE, MOTOR_OFF};
 
 	//////////////////////////////////////////////
 	//FIELDS//////////////////////////////////////
@@ -45,18 +42,10 @@ public class WheelDriver {
 	private boolean backRight;
 	private boolean backLeft;
 	
-
-	//Movements command packs
-	private byte [] MAKEMOVEFORWARD = {MOTORCONTROLCOMMAND, MOTORSPEEDHIGH, MOTORSPEEDLOW, FORWARDHIGH, FORWARDLOW, ROTATIONHIGH, ROTATIONLOW, NOTREQUIREDHIGH, NOTREQUIREDLOW};
-	private byte [] MAKEMOVEREVERSE = {MOTORCONTROLCOMMAND, MOTORSPEEDHIGH, MOTORSPEEDLOW, REVERSEHIGH, REVERSELOW, ROTATIONHIGH, ROTATIONLOW, NOTREQUIREDHIGH, NOTREQUIREDLOW};
-	private byte [] MAKEMOVELEFT = {MOTORCONTROLCOMMAND, MOTORSPEEDHIGH, MOTORSPEEDLOW, LEFTHIGH, LEFTLOW, ROTATIONHIGH, ROTATIONLOW, NOTREQUIREDHIGH, NOTREQUIREDLOW};
-	private byte [] MAKEMOVERIGHT = {MOTORCONTROLCOMMAND, MOTORSPEEDHIGH, MOTORSPEEDLOW, RIGHTHIGH, RIGHTLOW, ROTATIONHIGH, ROTATIONLOW, NOTREQUIREDHIGH, NOTREQUIREDLOW};
-	private byte [] STOPMOVE = {MOTORCONTROLCOMMAND, MOTORSTOPHIGH, MOTORSTOPLOW, FORWARDHIGH, FORWARDLOW, ROTATIONHIGH, ROTATIONLOW, NOTREQUIREDHIGH, NOTREQUIREDLOW};
-
-	
 	//CONSTRUCTORS////////////////////////////////
 	
-	public WheelDriver(){
+	public WheelDriver(I2CDevice theArduino){
+		motorController = theArduino;
 		setFrontRight(false);
 		setFrontLeft(false);
 		setBackRight(false);
@@ -65,37 +54,16 @@ public class WheelDriver {
 
 	
 	//MOVEMENT METHODS////////////////////////////
-	
 	/**
-	 * Moves the bot x distance at y speed
-	 * @param distance the distance that the bot will move (0+)
-	 */
-	public void moveForwardDistance(int dist){
-		
-	}
-	
-	/**
-	 * Moves the bot x distance at y speed
-	 * @param dist distance the distance that the bot will move (0+)
-	 */
-	public void moveBackwardDistance(int dist){
-		
-	}
-	
-	/**
-	 * Moves the bot x distance at y speed
-	 * @param dist distance the distance that the bot will move (0+)
-	 */
-	public void moveLeftDistance(int dist){
-		
-	}
-	
-	/**
-	 * Moves the bot x distance at y speed
-	 * @param dist distance the distance that the bot will move (0+)
-	 */
-	public void moveRightDistance(int dist){
-		
+	* Send command to make bot move in given direction with given wheel speed
+	* @direction Should be one of the constants of FORWARD_BYTE, LEFT_BYTE, RIGHT_BYTE, BACKWARD_BYTE
+	* @Speed byte value between 0 and 255 for speed 255 max 0 is no motor.
+	*/
+	public void makeMove(byte direction, byte speed)
+	{
+		motorCommand[0] = direction;
+		motorCommand[1] = speed;
+		motorController.write(motorCommand, 0, motorCommand.length);
 	}
 	
 	/**
@@ -103,10 +71,7 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public void moveForward(){
-		openSerial();
-		serial.write(MAKEMOVEFORWARD);
-		serial.flush();
-		closeSerial();
+		makeMove(FORWARD_BYTE, MOTOR_FORWARD_BACKWARD_DEFAULT);
 	}
 	
 	/**
@@ -114,10 +79,7 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public void moveBackward(){
-		openSerial();
-    		serial.write(MAKEMOVEREVERSE);
-		serial.flush();
-		closeSerial();
+		makeMove(BACKWARD_BYTE, MOTOR_FORWARD_BACKWARD_DEFAULT);
 	}
 	
 	/**
@@ -126,10 +88,7 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public void moveLeft(){
-		openSerial();
-		serial.write(MAKEMOVELEFT);
-		serial.flush();
-		closeSerial();
+		makeMove(LEFT_BYTE, MOTOR_LEFTRIGHT_DEFAULT);
 	}
 	
 	/**
@@ -138,10 +97,14 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public void moveRight(){
-	 	openSerial();
-	 	serial.write(MAKEMOVERIGHT);
-    		serial.flush();
-		closeSerial();
+	 	makeMove(RIGHT_BYTE, MOTOR_LEFTRIGHT_DEFAULT);
+	}
+	
+	/**
+	 * Stop all wheel movement
+	 */
+	public void stopMovement(){
+	 	makeMove(STOP_BYTE, MOTOR_OFF);
 	}
 	
 	/**
@@ -152,7 +115,7 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public void turnLeft(){
-		
+		makeMove(SPIN_LEFT_BYTE, MOTOR_SPIN_DEFAULT_SPEED);
 	}
 	
 	
@@ -164,17 +127,7 @@ public class WheelDriver {
 	 * @param speed The speed in which the bot will move (0-255)
 	 */
 	public void turnRight(){
-		
-	}
-	
-	/**
-	 * Stop all wheel movement
-	 */
-	public void stopMovement(){
-	 	openSerial();
-		serial.write(STOPMOVE);
-		serial.flush();
-		closeSerial();
+		makeMove(SPIN_RIGHT_BYTE, MOTOR_SPIN_DEFAULT_SPEED);
 	}
 
 	//GETTERS AND SETTERS/////////////////////////
@@ -236,41 +189,5 @@ public class WheelDriver {
 	 */
 	public void setBackLeft(boolean backLeft) {
 		this.backLeft = backLeft;
-	}
-
-	/**
-	* Open the serial port if it is not already open
-	*/
-	private void openSerial()
-	{
-		try
-		{
-			if (!serial.isOpen())
-			{
-				serial.open(Serial.DEFAULT_COM_PORT, BAUDRATE);
-			}
-		}
-		catch(Exception ex)
-		{
-			
-		}
-	}
-
-	/**
-	* Close the serial port
-	*/
-	private void closeSerial()
-	{
-		try
-		{
-			if (!serial.isClosed())
-			{
-				serial.close();
-			}
-		}
-		catch (Exception ex)
-		{
-			
-		}
 	}
 }
