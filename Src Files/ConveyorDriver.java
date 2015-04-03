@@ -31,15 +31,36 @@ public class ConveyorDriver {
 	//ACTION METHODS//////////////////////////////
 	public void sendStop()
 	{
-		motorController.write(STOP_BYTE);
+		try
+		{
+			motorController.write(STOP_BYTE);
+		}
+		catch(Exception ex)
+		{
+			System.out.println("Error in ConveyorDriver Stop Message");
+		}
 	}
 	public void sendLoad()
 	{
-		motorController.write(LOAD_BYTE);
+		try
+		{
+			motorController.write(LOAD_BYTE);
+		}
+		catch(Exception ex)
+		{
+			System.out.println("Error in ConveyorDriver Load Message");
+		}
 	}
 	public void sendRelease()
 	{
-		motorController.write(RELEASE_BYTE);
+		try
+		{
+			motorController.write(RELEASE_BYTE);
+		}
+		catch(Exception ex)
+		{
+			System.out.println("Error in ConveyorDriver Release Message");
+		}
 	}
 
 	
