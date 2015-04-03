@@ -15,6 +15,7 @@ public class TestWheelDriver
 			I2CDevice arduino = bus.getDevice(0x04);
 		
 			WheelDriver wheelDrive = new WheelDriver(arduino);
+			ConveyorDriver conveyor = new ConveyorDriver(arduino);
 			
 			while (true)
 			{
@@ -46,10 +47,13 @@ public class TestWheelDriver
 						wheelDrive.turnRight();
 						break;
 					case 'e':
+						conveyor.sendLoad();
 						break;
 					case 't':
+					conveyor.sendStop();
 						break;
 					case 'r':
+						conveyor.sendRelease();
 						break;
 					default:
 						System.out.println("Invalid input");
