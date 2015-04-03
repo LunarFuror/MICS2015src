@@ -7,18 +7,41 @@
  *
  */
 
+// add imports to make the things do the stuff -bk
+import com.pi4j.io.i2c.I2CBus;
+import com.pi4j.io.i2c.I2CDevice;
+import com.pi4j.io.i2c.I2CFactory;
+
 public class ConveyorDriver {
-	//////////////////////////////////////////////
-	//FIELDS//////////////////////////////////////
+
+	//Constants///////////////////////////////////
 	
+	private final byte STOP_BYTE = 0x07;
+	private final byte LOAD_BYTE = 0x08;
+	private final byte RELEASE_BYTE = 0x09;
 	
-	//CONSTRUCTORS////////////////////////////////
-	public ConveyorDriver(){
+	//will be used to store the bus
+	private I2Device motorController;
 		
+	//CONSTRUCTORS////////////////////////////////
+	public ConveyorDriver(I2CDevice theArduino){
+	motorController = theArduino;	
 	}
 	
 	//ACTION METHODS//////////////////////////////
-	
+	public void sendStop()
+	{
+		motorController.write(STOP_BYTE);
+	}
+	public void sendLoad()
+	{
+		motorController.write(LOAD_BYTE);
+	}
+	public void sendRelease()
+	{
+		motorController.write(RELEASE_BYTE);
+	}
+
 	
 	//GETTERS AND SETTERS/////////////////////////
 	public String ToString(){
