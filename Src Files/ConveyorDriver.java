@@ -21,7 +21,7 @@ public class ConveyorDriver {
 	private final byte RELEASE_BYTE = 0x09;
 	
 	//will be used to store the bus
-	private I2Device motorController;
+	private I2CDevice motorController;
 		
 	//CONSTRUCTORS////////////////////////////////
 	public ConveyorDriver(I2CDevice theArduino){
