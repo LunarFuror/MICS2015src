@@ -8,6 +8,7 @@
  */
 public class Main {
 	
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		
 		USBSend send = new USBSend();

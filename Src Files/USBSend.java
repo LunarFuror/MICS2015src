@@ -18,56 +18,55 @@ import lejos.pc.comm.NXTConnector;
  *
  * Your NXT should be running a sample such as USBReceive.
  *
- * @author Lawrie Griffiths
- * Modified by Grayson Lorenz
+ * @author Lawrie Griffiths Modified by Grayson Lorenz
  *
  */
 public class USBSend {
-	public static NXTConnector conn = new NXTConnector();
-	public static DataInputStream inDat;
-	public static DataOutputStream outDat;
+	public static NXTConnector			conn	= new NXTConnector();
+	public static DataInputStream		inDat;
+	public static DataOutputStream	outDat;
 	
 	public USBSend() {
-	while (!conn.connectTo("usb://")) {
-		conn.addLogListener(new NXTCommLogListener() {
-			public void logEvent(String message) {
-				System.out.println("USBSend Log.listener: " + message);
-			}
-
-			public void logEvent(Throwable throwable) {
-				System.out.println("USBSend Log.listener - stack trace: ");
-				throwable.printStackTrace();
-			}
-		});
-
+		while (!conn.connectTo("usb://")) {
+			conn.addLogListener(new NXTCommLogListener() {
+				public void logEvent(String message) {
+					System.out.println("USBSend Log.listener: " + message);
+				}
+				
+				public void logEvent(Throwable throwable) {
+					System.out.println("USBSend Log.listener - stack trace: ");
+					throwable.printStackTrace();
+				}
+			});
+			
 		}
-			inDat = new DataInputStream(conn.getInputStream());
-			outDat = new DataOutputStream(conn.getOutputStream());
+		inDat = new DataInputStream(conn.getInputStream());
+		outDat = new DataOutputStream(conn.getOutputStream());
 		
 	}
 	
-	public static int getSensor(){
+	public static int getSensor() {
 		int x = 0;
-		//try to write out
+		// try to write out
 		try {
 			outDat.writeInt(1);
 			outDat.flush();
 		} catch (IOException ioe) {
 			System.err.println("IO Exception writing bytes");
 		}
-		//try to read response
+		// try to read response
 		try {
 			x = inDat.readInt();
 		} catch (IOException ioe) {
 			System.err.println("IO Exception reading reply");
 		}
-		//print response and return it
-		//System.out.println("Sent " + 1 + " Received " + x);
+		// print response and return it
+		// System.out.println("Sent " + 1 + " Received " + x);
 		return x;
 	}
 	
-	public static void closeStreams(){
-		//try to close all the streamss
+	public static void closeStreams() {
+		// try to close all the streamss
 		try {
 			inDat.close();
 			outDat.close();
