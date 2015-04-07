@@ -82,7 +82,7 @@ public class NXTSensors {
 	 * anyway. Why are you reading this? Don't you trust my work?
 	 */
 	public static void generateOutput() {
-		System.out.print("Generate ")
+		System.out.print("Generate ");
 		sensors = 0;
 		if (touchRightFront.isPressed())
 			sensors += 1;

@@ -21,17 +21,15 @@ public class MovementLogic {
 	public static int colorFront;
 	public static int colorRear;
 	public static int sensors = 0;
-	public static USBsend send;
-	public static int lastColor;
+	public static USBSend send;
 	//  ints for the color sensors: 0 white, 1 = red , 2 = black
 	
 	
 	//CONSTRUCTORS////////////////////////////////
 	public MovementLogic(){
-		send = new USBsend();
+		send = new USBSend();
 		speed = 100;
-		lastColor = 0;
-		wheels = new WheelDriver();
+		//wheels = new WheelDriver();
 		touchFrontRight = false;
 		touchFrontLeft = false;
 		touchBackRight = false;
@@ -46,18 +44,21 @@ public class MovementLogic {
 	/*
 	 *	Just a thing to test the sensors with rolling frame or w/e we need it for
 	 */
-	public static void testRun(){
-		wheels.moveRight();
-		while(!touchFrontRight()){}
-		wheels.stopMovement();
-		
-		wheels.moveBackward();
-		while(!touchFrontRight()){}
-		wheels.stopMovement();
-		
-		wheels.moveLeft();
-		while(!touchFrontRight()){}
-		wheels.stopMovement();
+	public static void test(){
+	
+	updateSensors();
+	
+//		wheels.moveRight();
+//		while(!touchFrontRight()){}
+//		wheels.stopMovement();
+//		
+//		wheels.moveBackward();
+//		while(!touchFrontRight()){}
+//		wheels.stopMovement();
+//		
+//		wheels.moveLeft();
+//		while(!touchFrontRight()){}
+//		wheels.stopMovement();
 	}
 	
 	/**
@@ -150,61 +151,69 @@ public class MovementLogic {
 			// COLOR BACK
 			if ((sensors - 128) >= 0) {
 				sensors -= 128;
-				//System.out.println("COLOR BACK : BLACK");
+				System.out.print("COLOR BACK : BLACK ");
 			} else if ((sensors - 64) >= 0) {
 				sensors -= 64;
-				//System.out.println("COLOR BACK : RED");
-			} else
-				//System.out.println("COLOR BACK : white");
+				System.out.print("COLOR BACK : RED ");
+			} else{
+				System.out.print("COLOR BACK : white ");
+			}
 			
 			// COLOR FRONT
 			if ((sensors - 32) >= 0) {
 				sensors -= 32;
-				//System.out.println("COLOR FRONT : BLACK");
+				System.out.print("COLOR FRONT : BLACK ");
 				colorFront = 2;
 			} else if ((sensors - 16) >= 0) {
 				sensors -= 16;
-				//System.out.println("COLOR FRONT : RED");
+				System.out.print("COLOR FRONT : RED ");
 				colorFront = 1;
-			} else
-				//System.out.println("COLOR BACK : white");
+			} else{
+				System.out.print("COLOR FRONT : white ");
 				colorFront = 0;
+				}
 			
 			// TOUCH BACK LEFT
 			if ((sensors - 8) >= 0) {
 				sensors -= 8;
-				//System.out.println("TOUCH BACK LEFT : TRUE");
+				System.out.print("TOUCH BACK LEFT : TRUE ");
 				touchBackLeft = true;
-			} else
-				//System.out.println("TOUCH BACK LEFT : false");
+			} else{
+				System.out.print("TOUCH BACK LEFT : false ");
 				touchBackLeft = false;
+				}
 			
 			// TOUCH BACK RIGHT
 			if ((sensors - 4) >= 0) {
 				sensors -= 4;
-				//System.out.println("TOUCH BACK RIGHT : TRUE");
+				System.out.print("TOUCH BACK RIGHT : TRUE ");
 				touchBackRight = true;
-			} else
-				//System.out.println("TOUCH BACK RIGHT : false");
+			} else{
+				System.out.print("TOUCH BACK RIGHT : false ");
 				touchBackRight = false;
+				}
 			
 			// TOUCH FRONT LEFT
 			if ((sensors - 2) >= 0) {
 				sensors -= 2;
-				//System.out.println("TOUCH FRONT LEFT : TRUE");
+				System.out.print("TOUCH FRONT LEFT : TRUE ");
 				touchFrontLeft = true;
-			} else
-				//System.out.println("TOUCH FRONT LEFT : false");
+			} else{
+				System.out.print("TOUCH FRONT LEFT : false ");
 				touchFrontLeft = false;
+				}
 			
 			// TOUCH FRONT RIGHT
 			if ((sensors - 1) >= 0) {
 				sensors -= 1;
-				//System.out.println("TOUCH FRONT RIGHT : TRUE");
+				System.out.print("TOUCH FRONT RIGHT : TRUE ");
 				touchFrontRight = true;
-			} else
-				//System.out.println("TOUCH FRONT RIGHT : false");
+			} else{
+				System.out.print("TOUCH FRONT RIGHT : false ");
 				touchFrontRight = false;
+				}
+				
+				System.out.println("");
 		}
 	}
 	
