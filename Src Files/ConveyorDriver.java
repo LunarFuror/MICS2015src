@@ -8,9 +8,7 @@
  */
 
 // add imports to make the things do the stuff -bk
-import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
-import com.pi4j.io.i2c.I2CFactory;
 
 public class ConveyorDriver {
 
