@@ -7,22 +7,21 @@
 	 * @author austin
 	 *
 	 */
-	@SuppressWarnings("static-access")
-public class MovementLogic {
+	public class MovementLogic {
 	//////////////////////////////////////////////
 	//FIELDS//////////////////////////////////////
-	public static WheelDriver wheels;
-	public static int speed;
-	public static int dist;
-	public static boolean touchFrontRight;
-	public static boolean touchFrontLeft;
-	public static boolean touchBackRight;
-	public static boolean touchBackLeft;
-	public static int colorFront;
-	public static int colorRear;
-	public static int sensors = 0;
-	public static int lastColor;
-	public static USBSend send;
+	public WheelDriver wheels;
+	public int speed;
+	public int dist;
+	public boolean touchFrontRight;
+	public boolean touchFrontLeft;
+	public boolean touchBackRight;
+	public boolean touchBackLeft;
+	public int colorFront;
+	public int colorRear;
+	public int sensors = 0;
+	public int lastColor;
+	public USBSend send;
 	//  ints for the color sensors: 0 white, 1 = red , 2 = black
 	
 	
@@ -47,18 +46,18 @@ public class MovementLogic {
 	/*
 	 *	Just a thing to test the sensors with rolling frame or w/e we need it for
 	 */
-	public static void test(){
+	public void test(){
 
 	}
 	
-	public static void startFindBall(){
+	public void findBall(){
 		wheels.moveRight();
 		while(!touchFrontRight() && !touchBackRight()){}
 		wheels.stopMovement();
 	}
 	
 
-	public static void moveToHoop(){
+	public void moveToHoop(){
 		wheels.moveLeft();
 		while(colorFront() != 2){}
 		lastColor = colorFront();
@@ -76,29 +75,26 @@ public class MovementLogic {
 		wheels.moveBackward();
 		while(colorFront() == 1){}
 		wheels.stopMovement();
-		sendDeploySignal();
 	}
 
-	public static void followCenterLineForward(){
+	public void followCenterLineForward(){
 		//PUT USEFUL SHIT HERE
 //		wheels.moveForward();
 //		while(colorFront() == 2){}
 //		wheels.stopMovement();
 	}
 
-	public static void sendDeploySignal(){
+	public void sendDeploySignal(){
 		
 	}
 	
-	public static void sendGatherSignal(){
+	public void sendGatherSignal(){
 		
 	}
 	
-	public static void moveToStart(){
+	public void moveToStart(){
 		wheels.moveLeft();
 		while(!touchFrontLeft() && !touchBackLeft()){}
-		
-		sendGatherSignal();
 		
 		wheels.moveBackward();
 		while(!touchBackLeft() && !touchBackRight()){}
@@ -110,7 +106,7 @@ public class MovementLogic {
 	 * Decodes the Sensor data (sensors)
 	 * Sets local sensor var's
 	 */
-	public static void decode() {
+	public void decode() {
 		// Does the decoding, either add another global variable that this
 		// modifies, or find a way to use this in your own way.
 		while (sensors != 0) {
@@ -189,7 +185,7 @@ public class MovementLogic {
 	 *	Get's the sensor code from the NXT
 	 *	Decodes the sensor code & sets the local sensor data
 	 */
-	public static void updateSensors(){
+	public void updateSensors(){
 		setSensors();
 		decode();
 	}
@@ -198,7 +194,7 @@ public class MovementLogic {
 	 *	Updates sensors
 	 *	Returns local sensor data (mostly for loops)
 	 */
-	public static int colorFront() {
+	public int colorFront() {
 		updateSensors();
 		return colorFront;
 	}
@@ -207,7 +203,7 @@ public class MovementLogic {
 	 *	Updates sensors
 	 *	Returns local sensor data (mostly for loops)
 	 */
-	public static boolean touchBackRight(){
+	public boolean touchBackRight(){
 		updateSensors();
 		return touchBackRight;
 	}
@@ -216,7 +212,7 @@ public class MovementLogic {
 	 *	Updates sensors
 	 *	Returns local sensor data (mostly for loops)
 	 */
-	public static boolean touchBackLeft(){
+	public boolean touchBackLeft(){
 		updateSensors();
 		return touchBackLeft;
 	}
@@ -225,7 +221,7 @@ public class MovementLogic {
 	 *	Updates sensors
 	 *	Returns local sensor data (mostly for loops)
 	 */
-	public static boolean touchFrontLeft(){
+	public boolean touchFrontLeft(){
 		updateSensors();
 		return touchFrontLeft;
 	}
@@ -234,12 +230,12 @@ public class MovementLogic {
 	 *	Updates sensors
 	 *	Returns local sensor data (mostly for loops)
 	 */
-	public static boolean touchFrontRight(){
+	public boolean touchFrontRight(){
 		updateSensors();
 		return touchFrontRight;
 	}
 	
-	public static void setSensors(){
+	public void setSensors(){
 		sensors=send.getSensor();
 	}
 	
@@ -247,7 +243,7 @@ public class MovementLogic {
 	 *	Updates sensors
 	 *	Returns local sensor data (mostly for loops)
 	 */
-	public static String ToString(){
+	public String ToString(){
 		return "MOVEMENT: output";
 	}
 	

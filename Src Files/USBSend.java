@@ -22,9 +22,9 @@ import lejos.pc.comm.NXTConnector;
  *
  */
 public class USBSend {
-	public static NXTConnector			conn	= new NXTConnector();
-	public static DataInputStream		inDat;
-	public static DataOutputStream	outDat;
+	public NXTConnector			conn	= new NXTConnector();
+	public DataInputStream		inDat;
+	public DataOutputStream	outDat;
 	
 	public USBSend() {
 		while (!conn.connectTo("usb://")) {
@@ -45,7 +45,7 @@ public class USBSend {
 		
 	}
 	
-	public static int getSensor() {
+	public int getSensor() {
 		int x = 0;
 		// try to write out
 		try {
@@ -65,7 +65,7 @@ public class USBSend {
 		return x;
 	}
 	
-	public static void closeStreams() {
+	public void closeStreams() {
 		// try to close all the streamss
 		try {
 			inDat.close();
